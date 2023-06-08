@@ -1,14 +1,23 @@
 import re
+from models import Quotes
 import connect
-from models import Authors, Quotes
+
+import redis
+from redis_lru import RedisLRU
 
 
+client = redis.StrictRedis(host='localhost', port=6379, password=None)
+cache = RedisLRU(client)
+
+
+@cache
 def parser(string: str) -> list:
     if ',' in string:
         string = string.strip().replace(' ', '').split(',')
     return string
 
 
+@cache
 def find_match(param):
     quotes = Quotes.objects()
     result = ["List of quotes: "]
