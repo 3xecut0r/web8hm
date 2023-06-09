@@ -1,4 +1,5 @@
 import re
+from typing import Union, List
 from src.models import Quotes
 
 import redis
@@ -10,14 +11,24 @@ cache = RedisLRU(client)
 
 
 @cache
-def parser(string: str) -> list:
+def parser(string: str) -> Union[str, List[str]]:
+    """
+     Parses the input string and returns either a string or a list of strings.
+    :param string:  Input string to parse.
+    :return: Either a string or a list of strings.
+    """
     if ',' in string:
         string = string.strip().replace(' ', '').split(',')
     return string
 
 
 @cache
-def find_match(param):
+def find_match(param: Union[str, List[str]]) -> List[str]:
+    """
+    Finds quotes that match the specified parameter.
+    :param param: The parameter to match against.
+    :return: A list of quotes that match the parameter.
+    """
     quotes = Quotes.objects()
     result = ["List of quotes: "]
     if isinstance(param, list):

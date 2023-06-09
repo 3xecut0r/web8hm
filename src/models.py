@@ -3,20 +3,20 @@ from mongoengine.fields import ListField, StringField, ReferenceField, BooleanFi
 
 
 class Authors(Document):
-    fullname = StringField(required=True, unique=True)
-    born_date = StringField()
-    born_location = StringField()
-    description = StringField()
+    fullname: StringField = StringField(required=True, unique=True)
+    born_date: StringField = StringField()
+    born_location: StringField = StringField()
+    description: StringField = StringField()
 
 
 class Quotes(Document):
-    tags = ListField(StringField())
-    author = ReferenceField(Authors, required=True)
-    quote = StringField()
+    tags:  ListField = ListField(StringField())
+    author: ReferenceField = ReferenceField(Authors, required=True)
+    quote: StringField = StringField()
 
 
 class Contacts(Document):
-    fullname = StringField(required=True)
-    email = EmailField(required=True)
-    address = StringField()
-    email_sent = BooleanField(default=False)
+    fullname: StringField = StringField(required=True)
+    email: EmailField = EmailField(required=True)
+    address: StringField = StringField()
+    email_sent: BooleanField = BooleanField(default=False)
