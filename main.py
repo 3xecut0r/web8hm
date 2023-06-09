@@ -1,6 +1,5 @@
 import re
-from models import Quotes
-import connect
+from src.models import Quotes
 
 import redis
 from redis_lru import RedisLRU

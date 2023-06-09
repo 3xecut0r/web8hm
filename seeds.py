@@ -1,4 +1,4 @@
-from models import Authors, Quotes
+from src.models import Authors, Quotes
 import json
 
 
